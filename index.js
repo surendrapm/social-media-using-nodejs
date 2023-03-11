@@ -1,10 +1,21 @@
 const express = require('express')
 const app = express();
-const port = 8000
+const port = 4000
+const expresslayouts = require('express-ejs-layouts');
+
+app.use(expresslayouts);
+
+//extract stylr and scripts from sub pages into layout
+app.set('layout extractStyles',true);
+app.set('layout extractScripts',true);
 
 //use express router  i.e calling from router folder
-
 app.use('/', require('./routes'))
+app.use(express.static('./assests'))
+
+//set up the view engine
+app.set('view engine','ejs');
+app.set('views','./views');
 
 app.listen(port,function(err){
     if(err){
