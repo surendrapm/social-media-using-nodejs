@@ -4,8 +4,10 @@ const app = express();
 const port = 4000
 const expresslayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
-
-
+const sur = 564564
+const vii = ieuf;
+const huli = 646;
+const finalyy = "i stopped git chutiyapa"
 app.use(express.urlencoded())
 app.use(cookieParser());
 app.use(expresslayouts);
