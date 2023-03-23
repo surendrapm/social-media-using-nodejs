@@ -1,30 +1,35 @@
 {
   "name": "codeial",
   "version": "1.0.0",
-  "description": "my all social media application ",
+  "description": "my social media application",
   "main": "index.js",
   "scripts": {
     "start": "nodemon index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "social"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sass-watch": "sass --no-source-map --watch ./assests/scss/:./assests/css/",
+    "dev": "npm-run-all --parallel sass-watch start"
+
+
   },
   "keywords": [
-    "devsurii"
+    "social"
   ],
-  "author": "surendra m",
+  "author": "surendram",
   "license": "ISC",
   "dependencies": {
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.6",
-    "ejs": "^3.1.8",
+    "ejs": "^3.1.9",
     "express": "^4.18.2",
     "express-ejs-layouts": "^2.5.1",
     "express-session": "^1.17.3",
     "mongoose": "^6.9.1",
     "passport": "^0.6.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "sass": "^1.59.3"
+  },
+  "devDependencies": {
+    "npm": "^9.6.2",
+    "npm-run-all": "^4.1.5"
   }
 }
