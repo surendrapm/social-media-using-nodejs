@@ -3,6 +3,8 @@ body {
   text-align: center;
 }
 body #layout-main {
-  height: 37rem;
-  background-color: aqua;
+  position: relative;
+  height: auto;
+  text-align: justify;
+  overflow: auto;
 }
