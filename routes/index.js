@@ -10,12 +10,12 @@ router.get('/', homecontroller.home);
 
 router.use('/users',require('./users'));
 router.use('/posts',require('./post'))
-
+router.use('/comments',require('./comments'))
 
 //for any routes,access from here
 //router.use('/routerName',require('./routerFile'));
 
-console.log(homecontroller.home)
+
 module.exports = router;
 
 
