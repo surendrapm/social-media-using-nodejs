@@ -8,9 +8,21 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport')
 const passportLocal = require('./config/passport-local-strategy')
+const passportJWT = require('./config/passport-jwt-strategy')
+const passportGoogle = require('./config/passport-google-outh2-strategy')
 const MongoStore = require('connect-mongo')(session);
 const flash = require('connect-flash');
 const custommidware = require('./config/middleware')
+
+// setup the chat server to be used with socket.io
+const chatserver = require('http').Server(app);
+const chatSockets = require('./config/chat_socket').chatSockets(chatserver);
+
+
+chatserver.listen(5000)
+console.log('chat server is listening on port 5000')
+
+
 // app.use(sassMiddleware({
 //     src:'./assets/scss'
 //     dest:'./assets/css',
@@ -19,9 +31,12 @@ const custommidware = require('./config/middleware')
 //     prefix:'/css'
 // }));
 
-app.use(express.urlencoded())
+app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
 app.use(expresslayouts);
+
+//make the uploads part available to the browser
+app.use('/uploads',express.static(__dirname +'/uploads'))
 
 //extract stylr and scripts from sub pages into layout
 app.set('layout extractStyles',true);
@@ -57,11 +72,15 @@ app.use(session({
       
 }));
 
+
+
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use(passport.setAuthenticatedUser)
 app.use(flash());
 app.use(custommidware.setFlash);
-app.use(passport.setAuthenticatedUser)
+
 
 //use express router  i.e calling from router folder
 app.use('/', require('./routes'))

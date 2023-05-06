@@ -30,4 +30,24 @@
     
     </secction>
     
+  <%- include('_chat_box')  -%>
+
 </div>
+<script src="/js/home_posts.js"></script>
+<script src="/js/home_comments.js"></script>
+<script src="/js/toggle_likes.js"></script>
+<script>
+  $('.toggle-like-button').each(function(){
+      let self = this;
+      console.log(self)
+      let toggleLike = new ToggleLike(self);
+  });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+<% if(locals.user){%>
+<script>
+     new ChatEngine('user-chat-box','<%= locals.user._id %>')
+</script>
+<%}%>

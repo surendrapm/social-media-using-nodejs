@@ -1,10 +1,12 @@
-
+<li id="comment-<%= comment._id %>"></li>
 <li>
     <p>
 
         <% if(locals.user && locals.user.id == comment.user.id) {%>
+
+
             <small>
-                <a href="/comments/destroy/<%= comment.id %>">X</a>
+                <a class="delete-comment-button" href="/comments/destroy/<%= comment.id %>">X</a>
             </small>
             <% } %>
     
@@ -13,6 +15,19 @@
         <small>
             <%= comment.user.name %>
         </small>
+           <!-- Change :: display the likes of this post if the user is looged in then show the link to toggle likes else just show the count -->
+           <!-- study about the data attribute  -->
+        <small>
+            <%if(locals.user){%>
+                
+                <a href="/likes/toggle/?id=<%=comment._id%>&type=Comment" class="toggle-like-button" data-likes="<%= comment.likes.length %>">
+                    <%= comment.likes.length %> Likes
+                </a>
+                <% }else{ %>
+                    <%= comment.likes.length %> Likes
+                    <% } %>
+        </small>
+
     </p>
 
 
